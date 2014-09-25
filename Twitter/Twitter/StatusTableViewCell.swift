@@ -1,0 +1,33 @@
+//
+//  StatusTableViewCell.swift
+//  Twitter
+//
+//  Created by Tianyu Shi on 9/24/14.
+//  Copyright (c) 2014 Tianyu. All rights reserved.
+//
+
+import UIKit
+
+class StatusTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    var status: Status?
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(status: Status) {
+        
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+
+}
