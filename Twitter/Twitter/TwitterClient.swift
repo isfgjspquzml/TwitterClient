@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  TwitterClient.swift
 //  Twitter
 //
-//  Created by Tianyu Shi on 9/24/14.
+//  Created by Tianyu Shi on 9/25/14.
 //  Copyright (c) 2014 Tianyu. All rights reserved.
 //
 
@@ -10,28 +10,27 @@ import UIKit
 import Social
 import Accounts
 
-class ViewController: UIViewController, UITableViewDataSource {
+class TwitterClient: NSObject {
+    let accountStore: ACAccountStore!
+    let accountType: ACAccountType!
+    let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
     
-    @IBOutlet weak var feedTableView: UITableView!
+    var feedViewController: FeedViewController!
+    var statuses: [Status]?
     
-    @IBAction func didTapComposeView(sender: UIBarButtonItem) {
-            let composeView = ComposeViewController(nibName: nil, bundle: nil)
-        
-//        self.navigationController?.presentedViewController(composeView, animated: true, completion: {
-//            
-//        })
+    override init() {
+        accountStore = ACAccountStore()
+        accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
     }
     
-    let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-    var statuses: [Status]?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        let accountStore = ACAccountStore()
-        let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+    func getStatuses() -> [Status]? {
+        return statuses
+    }
+    
+    func updateStatuses() {
         accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (success, error) in
             if success {
-                let accounts = accountStore.accountsWithAccountType(accountType)
+                let accounts = self.accountStore.accountsWithAccountType(self.accountType)
                 let url = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
                 let authRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: url, parameters: nil)
                 
@@ -50,7 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource {
                         }
                         dispatch_async(dispatch_get_main_queue(), {
                             self.statuses = statusArray
-                            self.feedTableView.reloadData()
+                            self.feedViewController.feedTableView.reloadData()
                         })
                     }
                 })
@@ -61,20 +60,4 @@ class ViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = feedTableView.dequeueReusableCellWithIdentifier("statusCell") as StatusTableViewCell
-        let status = self.statuses![indexPath.row]
-        cell.tweetLabel.text = status.text
-        return cell
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if statuses != nil {
-            return statuses!.count
-        } else {
-            return 0
-        }
-    }
 }
-

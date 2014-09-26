@@ -15,7 +15,14 @@ class StatusTableViewCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
     
-    var status: Status?
+    var status: Status! {
+        willSet(status) {
+            
+        }
+        didSet(status) {
+            
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
