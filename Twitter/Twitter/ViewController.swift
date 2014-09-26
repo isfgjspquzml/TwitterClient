@@ -17,9 +17,9 @@ class ViewController: UIViewController, UITableViewDataSource {
     @IBAction func didTapComposeView(sender: UIBarButtonItem) {
             let composeView = ComposeViewController(nibName: nil, bundle: nil)
         
-        self.navigationController?.presentedViewController(composeView, animated: true, completion: {
-            
-        })
+//        self.navigationController?.presentedViewController(composeView, animated: true, completion: {
+//            
+//        })
     }
     
     let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -54,7 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource {
                         })
                     }
                 })
-
+                task.resume()
                 NSLog("Accounts: \(accounts)")
             } else {
                 NSLog("Error: \(error)")
@@ -65,7 +65,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = feedTableView.dequeueReusableCellWithIdentifier("statusCell") as StatusTableViewCell
         let status = self.statuses![indexPath.row]
-        cell.status = status
+        cell.tweetLabel.text = status.text
         return cell
     }
     

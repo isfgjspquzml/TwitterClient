@@ -11,6 +11,6 @@ import UIKit
 class Status: NSObject {
     var text: NSString
     init(dictionary: NSDictionary) {
-            self.text = dictionary["text"] as NSString
+        self.text = dictionary["text"] as NSString
     }
 }

@@ -17,13 +17,6 @@ class StatusTableViewCell: UITableViewCell {
     
     var status: Status?
 
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override init(status: Status) {
-    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
