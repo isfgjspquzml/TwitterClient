@@ -10,7 +10,10 @@ import UIKit
 
 class StatusTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var tweetLabel: UILabel!
     
     var status: Status?
 
@@ -19,7 +22,6 @@ class StatusTableViewCell: UITableViewCell {
     }
     
     override init(status: Status) {
-        
     }
     
     override func awakeFromNib() {
