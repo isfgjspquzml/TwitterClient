@@ -83,7 +83,6 @@ class TwitterClient: NSObject {
             if error != nil {
                 NSLog("Error getting timeline")
             } else {
-                println("test \(data)")
                 let array = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSArray
                 var statusArray:[Status] = Array()
                 for object in array {
@@ -108,6 +107,10 @@ class TwitterClient: NSObject {
     }
     
     func replyToTweet() {
+        
+    }
+    
+    func logout() {
         
     }
 }

@@ -15,23 +15,23 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func didTapComposeView(sender: UIBarButtonItem) {
         let composeView = ComposeViewController(nibName: "ComposeViewController", bundle: nil)
-        
-//        self.navigationController?.presentedViewController(composeView, animated: true, completion: {
-//            println("Hi")
-//        })
     }
+    
+    var refreshControl: UIRefreshControl?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         client.feedViewController = self
         client.getAccount()
-//        client.updateUser()
-//        client.updateStatuses()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        feedTableView.addSubview(refreshControl!)
         feedTableView.estimatedRowHeight = 90
         feedTableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -49,6 +49,18 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             return 0
         }
+    }
+    
+    func refresh(sender: AnyObject) {
+        let dateFormater = NSDateFormatter()
+        dateFormater.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
+        let title = "Updated " + dateFormater.stringFromDate(NSDate())
+        let attrDict = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
+        let attrString = NSAttributedString(string: title, attributes: attrDict)
+        client.updateStatuses()
+        feedTableView.reloadData()
+        refreshControl!.attributedTitle = attrString
+        refreshControl?.endRefreshing()
     }
 }
 

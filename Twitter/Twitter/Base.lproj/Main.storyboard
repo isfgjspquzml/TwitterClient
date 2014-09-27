@@ -110,6 +110,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="2Z6-ZV-1p5">
                             <connections>
                                 <action selector="didTapComposeView:" destination="vXZ-lx-hvc" id="xrf-aM-5n7"/>
+                                <segue destination="2Bu-5G-QmQ" kind="presentation" id="nAo-DD-Qj7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -120,6 +121,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="946" y="-557"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="aEB-9V-Yu9">
+            <objects>
+                <viewController id="2Bu-5G-QmQ" customClass="ComposeViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Gv-74-nlU"/>
+                        <viewControllerLayoutGuide type="bottom" id="05s-fo-bdw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pzA-aO-a5X">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fy4-qh-6ni">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lhx-OC-XSV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1640" y="-557"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MQw-bJ-sVd">
