@@ -17,10 +17,19 @@ class StatusTableViewCell: UITableViewCell {
     
     var status: Status! {
         willSet(status) {
-            
-        }
-        didSet(status) {
-            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {() in
+                let imageRequest = NSURL.URLWithString(status.profileImageURL)
+                var err: NSError?
+                let imageData = NSData.dataWithContentsOfURL(imageRequest,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
+                if err != nil {
+                    dispatch_async(dispatch_get_main_queue(), {() in
+                        self.userImageView.image = UIImage(data: imageData)
+                    })
+                }
+            })
+            nameLabel.text = status.name
+            usernameLabel.text = "@" + status.username
+            tweetLabel.text = status.text
         }
     }
 
