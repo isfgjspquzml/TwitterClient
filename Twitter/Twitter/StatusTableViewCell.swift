@@ -14,6 +14,9 @@ class StatusTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var tweetLabel: UILabel!
+    @IBOutlet weak var timeStampLabel: UILabel!
+    
+    var dateFormatter: NSDateFormatter
     
     var status: Status! {
         willSet(status) {
@@ -21,8 +24,8 @@ class StatusTableViewCell: UITableViewCell {
                 let imageRequest = NSURL.URLWithString(status.profileImageURL)
                 var err: NSError?
                 let imageData = NSData.dataWithContentsOfURL(imageRequest,options: NSDataReadingOptions.DataReadingMappedIfSafe, error: &err)
-                if err != nil {
-                    dispatch_async(dispatch_get_main_queue(), {() in
+                if err == nil {
+                    dispatch_async(dispatch_get_main_queue(), {
                         self.userImageView.image = UIImage(data: imageData)
                     })
                 }
@@ -30,11 +33,29 @@ class StatusTableViewCell: UITableViewCell {
             nameLabel.text = status.name
             usernameLabel.text = "@" + status.username
             tweetLabel.text = status.text
+            
+            var formattedDate: String?
+            let timeDiff = NSDate().timeIntervalSince1970 - status.timeStamp!
+            if timeDiff/(3600) > 24 {
+                let date = NSDate.dateWithTimeIntervalSinceReferenceDate(status.timeStamp!)
+                formattedDate = dateFormatter.stringFromDate(date)
+            } else {
+                println(timeDiff)
+                formattedDate = NSString(format: "%.0f", timeDiff/(3600)) + " h"
+            }
+            
+            timeStampLabel.text = formattedDate
         }
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        dateFormatter = NSDateFormatter()
+        dateFormatter.dateFromString("MMM dd")
+        super.init(coder: aDecoder)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
