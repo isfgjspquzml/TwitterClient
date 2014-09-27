@@ -40,7 +40,6 @@ class StatusTableViewCell: UITableViewCell {
                 let date = NSDate.dateWithTimeIntervalSinceReferenceDate(status.timeStamp!)
                 formattedDate = dateFormatter.stringFromDate(date)
             } else {
-                println(timeDiff)
                 formattedDate = NSString(format: "%.0f", timeDiff/(3600)) + " h"
             }
             

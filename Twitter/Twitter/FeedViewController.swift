@@ -8,23 +8,25 @@
 
 import UIKit
 
-class FeedViewController: UIViewController, UITableViewDataSource {
+class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     let client: TwitterClient = TwitterClient()
     
     @IBOutlet weak var feedTableView: UITableView!
     
     @IBAction func didTapComposeView(sender: UIBarButtonItem) {
-        let composeView = ComposeViewController(nibName: nil, bundle: nil)
+        let composeView = ComposeViewController(nibName: "ComposeViewController", bundle: nil)
         
-        //        self.navigationController?.presentedViewController(composeView, animated: true, completion: {
-        //
-        //        })
+//        self.navigationController?.presentedViewController(composeView, animated: true, completion: {
+//            println("Hi")
+//        })
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         client.feedViewController = self
-        client.updateStatuses()
+        client.getAccount()
+//        client.updateUser()
+//        client.updateStatuses()
     }
     
     override func viewDidLoad() {
