@@ -27,6 +27,8 @@ class StatusTableViewCell: UITableViewCell {
                 if err == nil {
                     dispatch_async(dispatch_get_main_queue(), {
                         self.userImageView.image = UIImage(data: imageData)
+                        self.userImageView.layer.cornerRadius = 3
+                        self.userImageView.clipsToBounds = true
                     })
                 }
             })

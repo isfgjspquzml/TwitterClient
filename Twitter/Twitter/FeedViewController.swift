@@ -13,10 +13,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBOutlet weak var feedTableView: UITableView!
     
-    @IBAction func didTapComposeView(sender: UIBarButtonItem) {
-        let composeView = ComposeViewController(nibName: "ComposeViewController", bundle: nil)
-    }
-    
     var refreshControl: UIRefreshControl?
     
     required init(coder aDecoder: NSCoder) {
