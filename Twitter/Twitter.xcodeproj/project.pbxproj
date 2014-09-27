@@ -95,10 +95,10 @@
 			children = (
 				8987663719D3BA6C004F42C9 /* AppDelegate.swift */,
 				8987665F19D3C667004F42C9 /* ComposeViewController.swift */,
+				89494DAE19D545A80054B5FE /* FeedViewController.swift */,
 				8987665D19D3C3A3004F42C9 /* Status.swift */,
 				8987665B19D3C1AD004F42C9 /* StatusTableViewCell.swift */,
 				8987666119D543EC004F42C9 /* TwitterClient.swift */,
-				89494DAE19D545A80054B5FE /* FeedViewController.swift */,
 				8987663B19D3BA6C004F42C9 /* Main.storyboard */,
 				8987663E19D3BA6C004F42C9 /* Images.xcassets */,
 				8987664019D3BA6C004F42C9 /* LaunchScreen.xib */,

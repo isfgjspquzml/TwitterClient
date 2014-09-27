@@ -11,6 +11,13 @@ import Social
 import Accounts
 
 class TwitterClient: NSObject {
+    class var client :TwitterClient {
+    struct Singleton {
+        static let instance = TwitterClient()
+        }
+        return Singleton.instance
+    }
+    
     let accountStore: ACAccountStore!
     let accountType: ACAccountType!
     let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
@@ -59,5 +66,17 @@ class TwitterClient: NSObject {
                 NSLog("Error: \(error)")
             }
         }
+    }
+    
+    func retweetTweet() {
+        
+    }
+    
+    func favoriteTweet() {
+        
+    }
+    
+    func replyToTweet() {
+        
     }
 }
