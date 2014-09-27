@@ -27,6 +27,7 @@ class TwitterClient: NSObject {
     var user: User?
     var statuses: [Status]?
     var account: ACAccount?
+    var storedTweet: String?
     
     override init() {
         accountStore = ACAccountStore()

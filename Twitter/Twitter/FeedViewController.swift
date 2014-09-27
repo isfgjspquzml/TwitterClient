@@ -12,6 +12,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let client: TwitterClient = TwitterClient()
     
     @IBOutlet weak var feedTableView: UITableView!
+    @IBOutlet weak var behindTintImageView: UIImageView!
     
     var refreshControl: UIRefreshControl?
     
@@ -32,6 +33,16 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         feedTableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "composeViewSegue" {
+            let composeViewController = segue.destinationViewController as ComposeViewController
+            composeViewController.feedViewControllerDelegate = self
+            UIView.animateWithDuration(0.5, animations: {
+                self.behindTintImageView.alpha = 1
+            })
+        }
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = feedTableView.dequeueReusableCellWithIdentifier("statusCell") as StatusTableViewCell
         let status = client.getStatuses()?[indexPath.row]
@@ -45,6 +56,12 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else {
             return 0
         }
+    }
+    
+    func returnFromComposeView() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.behindTintImageView.alpha = 0
+        })
     }
     
     func refresh(sender: AnyObject) {

@@ -10,14 +10,23 @@ import UIKit
 
 class ComposeViewController: UIViewController {
     @IBOutlet weak var composeView: UIView!
-    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var composeTextView: UITextView!
     @IBOutlet weak var charCountLabel: UILabel!
     @IBOutlet weak var tweetButton: UIButton!
     
-    lazy var background = UIImage(named: "behind_alert_view.png")
+    @IBAction func onBackgroundTap(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: {
+            if countElements(self.composeTextView.text) > 0 {
+                self.client.storedTweet = self.composeTextView.text
+            }
+        })
+    }
+    
+    var client = TwitterClient.client
+    var feedViewControllerDelegate: FeedViewController!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,18 +36,20 @@ class ComposeViewController: UIViewController {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        if client.storedTweet != nil && countElements(client.storedTweet!) > 0 {
+            composeTextView.text = client.storedTweet
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(red: 0.15, green: 1, blue: 0.15, alpha: 0.15)
-        composeView.backgroundColor = UIColor(red: 0.15, green: 1, blue: 0.15, alpha: 0.15)
-
-//        self.userImageView.layer.cornerRadius = 3
-//        self.userImageView.clipsToBounds = true
-        // Do any additional setup after loading the view.
+        
+        self.userImageView.layer.cornerRadius = 3
+        self.userImageView.clipsToBounds = true
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillDisappear(animated: Bool) {
+        feedViewControllerDelegate!.returnFromComposeView()
     }
 }

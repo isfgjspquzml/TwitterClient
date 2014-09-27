@@ -89,31 +89,34 @@
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="SAl-0X-5zU"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="behind_alert_view.png" translatesAutoresizingMaskIntoConstraints="NO" id="6Ib-ET-ojA">
+                                <rect key="frame" x="228" y="0.0" width="600" height="600"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                </accessibility>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="b9r-Aj-vPk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Cvr-jJ-9ao"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="b9r-Aj-vPk" secondAttribute="bottom" id="Dfb-Wc-4Pn"/>
                             <constraint firstItem="b9r-Aj-vPk" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="Khm-7i-ylK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="b9r-Aj-vPk" secondAttribute="trailing" id="PJG-Km-458"/>
+                            <constraint firstItem="6Ib-ET-ojA" firstAttribute="height" secondItem="kh9-bI-dsS" secondAttribute="height" id="PkD-gf-vAQ"/>
+                            <constraint firstAttribute="centerX" secondItem="6Ib-ET-ojA" secondAttribute="centerX" id="Z34-X0-ErN"/>
+                            <constraint firstAttribute="centerY" secondItem="6Ib-ET-ojA" secondAttribute="centerY" id="dKC-e2-0hB"/>
                             <constraint firstItem="b9r-Aj-vPk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="grv-8e-DGd"/>
+                            <constraint firstItem="6Ib-ET-ojA" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" id="ldz-HH-BCN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="b9r-Aj-vPk" secondAttribute="trailing" constant="-16" id="soS-V5-BWF"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="Cvr-jJ-9ao"/>
-                                <exclude reference="PJG-Km-458"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="k4K-kC-Fod">
                         <barButtonItem key="rightBarButtonItem" title="New" id="2Z6-ZV-1p5">
                             <connections>
-                                <segue destination="2Bu-5G-QmQ" kind="presentation" modalPresentationStyle="overCurrentContext" id="nAo-DD-Qj7"/>
+                                <segue destination="2Bu-5G-QmQ" kind="presentation" identifier="composeViewSegue" modalPresentationStyle="overCurrentContext" id="nAo-DD-Qj7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="behindTintImageView" destination="6Ib-ET-ojA" id="Ws6-Qq-bc2"/>
                         <outlet property="feedTableView" destination="b9r-Aj-vPk" id="JPq-rn-roN"/>
                     </connections>
                 </viewController>
@@ -159,7 +162,7 @@
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LcX-ee-d8b">
                                         <rect key="frame" x="121" y="163" width="373" height="305"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="0.75" colorSpace="calibratedWhite"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -177,11 +180,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="LcX-ee-d8b" secondAttribute="centerX" id="yej-7p-rTW"/>
                                 </constraints>
                             </view>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="A6t-C4-5r4" firstAttribute="top" secondItem="6Gv-74-nlU" secondAttribute="bottom" constant="-20" id="645-OL-QOw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A6t-C4-5r4" secondAttribute="trailing" constant="-16" id="6so-25-5N9"/>
@@ -191,6 +196,9 @@
                             <constraint firstAttribute="height" secondItem="A6t-C4-5r4" secondAttribute="height" id="jAd-Do-bss"/>
                             <constraint firstAttribute="width" secondItem="A6t-C4-5r4" secondAttribute="width" id="tNj-ZM-YNT"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="LKF-mc-Zv8" appends="YES" id="P7f-lA-IXJ"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="charCountLabel" destination="Tk7-HW-C6I" id="UAI-Pg-jYo"/>
@@ -198,11 +206,17 @@
                         <outlet property="composeView" destination="A6t-C4-5r4" id="jdc-NC-Er7"/>
                         <outlet property="nameLabel" destination="K1K-u6-oRP" id="Mnr-HI-nh1"/>
                         <outlet property="tweetButton" destination="r9a-XW-uIO" id="Phm-dL-s2S"/>
+                        <outlet property="userProfileImageView" destination="1Q5-Zj-EKd" id="h5G-Bo-ZSM"/>
                         <outlet property="usernameLabel" destination="2R2-Eb-Ill" id="fX0-zw-6RC"/>
                         <outlet property="view" destination="pzA-aO-a5X" id="fpa-vn-J7t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhx-OC-XSV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="LKF-mc-Zv8">
+                    <connections>
+                        <action selector="onBackgroundTap:" destination="2Bu-5G-QmQ" id="IN5-1N-dId"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1671" y="-557"/>
         </scene>
@@ -225,4 +239,7 @@
             <point key="canvasLocation" x="219" y="-557"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="behind_alert_view.png" width="320" height="460"/>
+    </resources>
 </document>
