@@ -43,9 +43,8 @@ class ComposeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.title = "Compose a Tweet!"
         let user: User? = TwitterClient.client.user
-        
         if user != nil {
             self.nameLabel.text = user!.name
             self.usernameLabel.text = user!.username
@@ -53,6 +52,9 @@ class ComposeViewController: UIViewController {
             self.charCountLabel.text = String(140 - countElements(TwitterClient.client.storedTweet))
             self.userProfileImageView.layer.cornerRadius = 3
             self.userProfileImageView.clipsToBounds = true
+            self.composeTextView.clipsToBounds = true
+            self.composeTextView.layer.cornerRadius = 10
+            self.composeTextView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
         }
     }
 
