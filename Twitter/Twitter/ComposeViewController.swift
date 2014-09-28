@@ -45,8 +45,8 @@ class ComposeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.userImageView.layer.cornerRadius = 3
-        self.userImageView.clipsToBounds = true
+//        self.userImageView.layer.cornerRadius = 3
+//        self.userImageView.clipsToBounds = true
     }
 
     override func viewWillDisappear(animated: Bool) {
