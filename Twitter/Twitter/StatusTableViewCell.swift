@@ -35,6 +35,7 @@ class StatusTableViewCell: UITableViewCell {
             nameLabel.text = status.name
             usernameLabel.text = "@" + status.username
             tweetLabel.text = status.text
+            tweetLabel.sizeToFit()
             
             var formattedDate: String?
             let timeDiff = NSDate().timeIntervalSince1970 - status.timeStamp!

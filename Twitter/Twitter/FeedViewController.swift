@@ -14,6 +14,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var feedTableView: UITableView!
     @IBOutlet weak var behindTintImageView: UIImageView!
     
+    let dateFormater = NSDateFormatter()
     var refreshControl: UIRefreshControl?
     
     required init(coder aDecoder: NSCoder) {
@@ -21,6 +22,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         TwitterClient.client.feedViewController = self
         TwitterClient.client.getAccount()
         
+        dateFormater.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
     }
@@ -29,7 +31,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         super.viewDidLoad()
         
         feedTableView.addSubview(refreshControl!)
-        feedTableView.estimatedRowHeight = 90
+        feedTableView.estimatedRowHeight = 100
         feedTableView.rowHeight = UITableViewAutomaticDimension
     }
     
@@ -43,7 +45,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         } else if segue.identifier == "tweetViewSegue" {
             let tweetViewController = segue.destinationViewController as TweetViewController
             let cellRow = feedTableView.indexPathForCell(sender as StatusTableViewCell)?.row
-            tweetViewController.cellRow = cellRow
+            tweetViewController.status = TwitterClient.client.statuses![cellRow!]
+            tweetViewController.feedViewControllerDelegate = self
         }
     }
     
@@ -73,8 +76,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func refresh(sender: AnyObject) {
-        let dateFormater = NSDateFormatter()
-        dateFormater.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
         let title = "Updated " + dateFormater.stringFromDate(NSDate())
         let attrDict = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
         let attrString = NSAttributedString(string: title, attributes: attrDict)
