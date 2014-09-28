@@ -47,14 +47,15 @@ class ComposeViewController: UIViewController {
         let user: User? = TwitterClient.client.user
         if user != nil {
             self.nameLabel.text = user!.name
-            self.usernameLabel.text = user!.username
+            self.usernameLabel.text = "@" + user!.username!
             self.userProfileImageView.image = user!.profileImage
             self.charCountLabel.text = String(140 - countElements(TwitterClient.client.storedTweet))
             self.userProfileImageView.layer.cornerRadius = 3
             self.userProfileImageView.clipsToBounds = true
             self.composeTextView.clipsToBounds = true
             self.composeTextView.layer.cornerRadius = 10
-            self.composeTextView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 10);
+            self.composeView.layer.cornerRadius = 5;
+            self.composeView.layer.masksToBounds = true;
         }
     }
 
