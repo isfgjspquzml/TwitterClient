@@ -19,13 +19,22 @@ class ComposeViewController: UIViewController {
     
     @IBAction func onBackgroundTap(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {
-            if countElements(self.composeTextView.text) > 0 {
-                TwitterClient.client.storedTweet = self.composeTextView.text
+            if self.feedViewControllerDelegate != nil {
+                if countElements(self.composeTextView.text) > 0 {
+                    TwitterClient.client.storedTweet = self.composeTextView.text
+                }
+            } else {
+                if countElements(self.composeTextView.text) > 0 {
+                    TwitterClient.client.storedReplyTweet = self.composeTextView.text
+                }
             }
         })
     }
     
+    
+    
     var feedViewControllerDelegate: FeedViewController!
+    var tweetViewControllerDelegate: TweetViewController!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -36,8 +45,14 @@ class ComposeViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        if countElements(TwitterClient.client.storedTweet) > 0 {
-            composeTextView.text = TwitterClient.client.storedTweet
+        if self.feedViewControllerDelegate != nil {
+            if countElements(TwitterClient.client.storedTweet) > 0 {
+                composeTextView.text = TwitterClient.client.storedTweet
+            }
+        } else {
+            if countElements(TwitterClient.client.storedReplyTweet) > 0 {
+                composeTextView.text = TwitterClient.client.storedReplyTweet
+            }
         }
     }
     
@@ -58,8 +73,12 @@ class ComposeViewController: UIViewController {
             self.composeView.layer.masksToBounds = true;
         }
     }
-
+    
     override func viewWillDisappear(animated: Bool) {
-        feedViewControllerDelegate!.returnFromComposeView()
+        if self.feedViewControllerDelegate != nil {
+            feedViewControllerDelegate!.returnFromComposeView()
+        } else {
+            tweetViewControllerDelegate!.returnFromComposeView()
+        }
     }
 }

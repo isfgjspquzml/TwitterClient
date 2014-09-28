@@ -74,12 +74,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3uh-vL-alg">
-                                <rect key="frame" x="47" y="323" width="39" height="30"/>
+                                <rect key="frame" x="61" y="323" width="39" height="30"/>
                                 <state key="normal" title="Reply">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onReplyTapped:" destination="6YM-eL-iXu" eventType="touchUpInside" id="37X-3U-sEo"/>
+                                    <segue destination="2Bu-5G-QmQ" kind="presentation" identifier="tweetToComposeView" modalPresentationStyle="overCurrentContext" id="gyL-zP-4Bh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfz-Pd-5Tb">
@@ -109,13 +109,24 @@
                                     <action selector="onReturnTapped:" destination="6YM-eL-iXu" eventType="touchUpInside" id="Pj8-QX-TlJ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="behind_alert_view.png" translatesAutoresizingMaskIntoConstraints="NO" id="Win-Gy-aiJ">
+                                <rect key="frame" x="-16" y="0.0" width="600" height="600"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" image="YES" notEnabled="YES"/>
+                                </accessibility>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Win-Gy-aiJ" secondAttribute="centerX" constant="16" id="SKj-D3-dfl"/>
                             <constraint firstItem="adQ-bb-L98" firstAttribute="width" secondItem="adQ-bb-L98" secondAttribute="height" multiplier="1:1" id="VTM-a0-K2q"/>
+                            <constraint firstAttribute="centerY" secondItem="Win-Gy-aiJ" secondAttribute="centerY" id="ZTT-mZ-CaP"/>
+                            <constraint firstItem="Win-Gy-aiJ" firstAttribute="height" secondItem="yyd-Ab-0sk" secondAttribute="height" id="edm-NZ-yvp"/>
+                            <constraint firstItem="Win-Gy-aiJ" firstAttribute="width" secondItem="yyd-Ab-0sk" secondAttribute="width" id="wWC-Qq-Peb"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="behindTintView" destination="Win-Gy-aiJ" id="EH9-l3-fat"/>
                         <outlet property="nameLabel" destination="uhY-kJ-sot" id="xrv-1o-n29"/>
                         <outlet property="numFavorites" destination="dCa-3a-X9o" id="uQl-fy-wkk"/>
                         <outlet property="numRetweets" destination="gq4-Eg-7uc" id="ttG-v8-ESX"/>
@@ -157,7 +168,7 @@
                                                         <constraint firstAttribute="height" constant="60" id="Ino-Ka-dZS"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" misplaced="YES" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJi-O6-cGz">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="700" ambiguous="YES" misplaced="YES" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TJi-O6-cGz">
                                                     <rect key="frame" x="163" y="8" width="55" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -169,13 +180,13 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="tweet al;sdkfjal;ksdfjl;aksdjfl;kajsdfl;kjadsf" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMp-aO-Ejc">
+                                                <label opaque="NO" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="tweet al;sdkfjal;ksdfjl;aksdjfl;kajsdfl;kjadsf" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RMp-aO-Ejc">
                                                     <rect key="frame" x="109" y="37" width="269" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6y-XV-Fsk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6y-XV-Fsk">
                                                     <rect key="frame" x="109" y="8" width="39" height="17"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -184,20 +195,28 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="D6y-XV-Fsk" firstAttribute="leading" secondItem="29f-nw-mHl" secondAttribute="trailing" constant="4" id="6Xz-Te-ptU"/>
-                                                <constraint firstItem="RMp-aO-Ejc" firstAttribute="top" secondItem="D6y-XV-Fsk" secondAttribute="bottom" constant="4" id="7Bu-u9-dWg"/>
+                                                <constraint firstItem="RMp-aO-Ejc" firstAttribute="top" secondItem="D6y-XV-Fsk" secondAttribute="bottom" constant="2" id="7Bu-u9-dWg"/>
                                                 <constraint firstItem="D6y-XV-Fsk" firstAttribute="top" secondItem="29f-nw-mHl" secondAttribute="top" id="7cO-Qs-F1p"/>
-                                                <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="RMp-aO-Ejc" secondAttribute="bottom" id="855-kx-tSM"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="RMp-aO-Ejc" secondAttribute="bottom" priority="950" id="855-kx-tSM"/>
                                                 <constraint firstItem="E9A-lL-7bZ" firstAttribute="trailing" secondItem="ZDV-rw-Gf5" secondAttribute="trailingMargin" id="9mQ-oA-ljM"/>
                                                 <constraint firstItem="E9A-lL-7bZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TJi-O6-cGz" secondAttribute="trailing" constant="4" id="Grh-OV-Zxi"/>
                                                 <constraint firstItem="RMp-aO-Ejc" firstAttribute="leading" secondItem="29f-nw-mHl" secondAttribute="trailing" constant="4" id="Ibe-x0-ral"/>
                                                 <constraint firstItem="E9A-lL-7bZ" firstAttribute="top" secondItem="ZDV-rw-Gf5" secondAttribute="topMargin" id="Q1Q-yl-Ajx"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="29f-nw-mHl" secondAttribute="bottom" id="Sh5-m8-ob2"/>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="RMp-aO-Ejc" secondAttribute="trailing" id="bTV-y7-H7S"/>
+                                                <constraint firstAttribute="centerY" secondItem="29f-nw-mHl" secondAttribute="centerY" constant="-0.5" id="dR1-cg-RLP"/>
                                                 <constraint firstItem="29f-nw-mHl" firstAttribute="leading" secondItem="ZDV-rw-Gf5" secondAttribute="leadingMargin" id="e0e-U5-dOL"/>
                                                 <constraint firstItem="TJi-O6-cGz" firstAttribute="leading" secondItem="D6y-XV-Fsk" secondAttribute="trailing" constant="2" id="eov-3k-GfX"/>
+                                                <constraint firstItem="D6y-XV-Fsk" firstAttribute="top" secondItem="ZDV-rw-Gf5" secondAttribute="topMargin" id="fQQ-I7-ysd"/>
                                                 <constraint firstItem="29f-nw-mHl" firstAttribute="top" secondItem="ZDV-rw-Gf5" secondAttribute="topMargin" id="lU6-aq-WLo"/>
                                                 <constraint firstItem="D6y-XV-Fsk" firstAttribute="baseline" secondItem="TJi-O6-cGz" secondAttribute="baseline" id="sMf-6f-Fso"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="lU6-aq-WLo"/>
+                                                    <exclude reference="7cO-Qs-F1p"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="D6y-XV-Fsk" id="gPa-xq-NEL"/>
@@ -383,4 +402,7 @@
     <resources>
         <image name="behind_alert_view.png" width="320" height="460"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="nAo-DD-Qj7"/>
+    </inferredMetricsTieBreakers>
 </document>

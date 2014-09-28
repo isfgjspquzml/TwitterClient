@@ -17,9 +17,7 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var timeStampLabel: UILabel!
     @IBOutlet weak var numRetweets: UILabel!
     @IBOutlet weak var numFavorites: UILabel!
-    
-    @IBAction func onReplyTapped(sender: AnyObject) {
-    }
+    @IBOutlet weak var behindTintView: UIImageView!
     
     @IBAction func onRetweetTapped(sender: AnyObject) {
     }
@@ -28,9 +26,9 @@ class TweetViewController: UIViewController {
     }
     
     @IBAction func onReturnTapped(sender: AnyObject) {
-        
         feedViewControllerDelegate!.returnFromTweetView()
-        
+        TwitterClient.client.storedReplyTweet = ""
+        self.dismissViewControllerAnimated(true, completion: {})
     }
     
     var status: Status?
@@ -61,22 +59,40 @@ class TweetViewController: UIViewController {
         timeStampLabel.text = dateFormater.stringFromDate(NSDate(timeIntervalSince1970: status!.timeStamp!))
         
         numRetweets.text = String(status!.retweetCount)
+        numRetweetsChanged()
         numFavorites.text = String(status!.favoriteCount)
+        numFavoritesChanged()
     }
     
-    func numRetweetsChanged(label: UILabel) {
+    func numRetweetsChanged() {
         if status!.retweeted == 0 {
-            label.font = UIFont(name: "System", size: 12)
+            numRetweets.font = UIFont.systemFontOfSize(12)
         } else {
-            label.font = UIFont(name: "System-Bold", size: 12)
+            numRetweets.font = UIFont.boldSystemFontOfSize(13)
         }
     }
     
-    func numFavoritesChanged(label: UILabel) {
-        if status!.favorited == 1 {
-            label.font = UIFont(name: "System", size: 12)
+    func numFavoritesChanged() {
+        if status!.favorited == 0 {
+            numFavorites.font = UIFont.systemFontOfSize(12)
         } else {
-            label.font = UIFont(name: "System-Bold", size: 12)
+            numFavorites.font = UIFont.boldSystemFontOfSize(13)
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "tweetToComposeView" {
+            let composeViewController = segue.destinationViewController as ComposeViewController
+            composeViewController.tweetViewControllerDelegate = self
+            UIView.animateWithDuration(0.5, animations: {
+                self.behindTintView.alpha = 1
+            })
+        }
+    }
+    
+    func returnFromComposeView() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.behindTintView.alpha = 0
+        })
     }
 }
