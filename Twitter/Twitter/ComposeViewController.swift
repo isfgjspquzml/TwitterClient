@@ -49,10 +49,12 @@ class ComposeViewController: UIViewController {
             if countElements(TwitterClient.client.storedTweet) > 0 {
                 composeTextView.text = TwitterClient.client.storedTweet
             }
+            tweetButton.setTitle("Tweet", forState: .Normal)
         } else {
             if countElements(TwitterClient.client.storedReplyTweet) > 0 {
                 composeTextView.text = TwitterClient.client.storedReplyTweet
             }
+            tweetButton.setTitle("Reply", forState: .Normal)
         }
     }
     
