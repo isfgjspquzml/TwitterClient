@@ -27,7 +27,7 @@ class TwitterClient: NSObject {
     var user: User?
     var statuses: [Status]?
     var account: ACAccount?
-    var storedTweet: String?
+    var storedTweet: String = ""
     
     override init() {
         accountStore = ACAccountStore()
@@ -108,10 +108,6 @@ class TwitterClient: NSObject {
     }
     
     func replyToTweet() {
-        
-    }
-    
-    func logout() {
         
     }
 }

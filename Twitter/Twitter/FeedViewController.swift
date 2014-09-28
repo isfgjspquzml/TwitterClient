@@ -9,7 +9,7 @@
 import UIKit
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    let client: TwitterClient = TwitterClient()
+//    let client: TwitterClient = TwitterClient()
     
     @IBOutlet weak var feedTableView: UITableView!
     @IBOutlet weak var behindTintImageView: UIImageView!
@@ -18,8 +18,8 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        client.feedViewController = self
-        client.getAccount()
+        TwitterClient.client.feedViewController = self
+        TwitterClient.client.getAccount()
         
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
@@ -45,14 +45,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = feedTableView.dequeueReusableCellWithIdentifier("statusCell") as StatusTableViewCell
-        let status = client.getStatuses()?[indexPath.row]
+        let status = TwitterClient.client.getStatuses()?[indexPath.row]
         cell.status = status
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if client.getStatuses()?.count > 0 {
-            return client.getStatuses()!.count
+        if TwitterClient.client.getStatuses()?.count > 0 {
+            return TwitterClient.client.getStatuses()!.count
         } else {
             return 0
         }
@@ -70,7 +70,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let title = "Updated " + dateFormater.stringFromDate(NSDate())
         let attrDict = NSDictionary(object: UIColor.blackColor(), forKey: NSForegroundColorAttributeName)
         let attrString = NSAttributedString(string: title, attributes: attrDict)
-        client.updateStatuses()
+        TwitterClient.client.updateStatuses()
         feedTableView.reloadData()
         refreshControl!.attributedTitle = attrString
         refreshControl?.endRefreshing()

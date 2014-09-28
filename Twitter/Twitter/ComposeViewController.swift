@@ -20,12 +20,11 @@ class ComposeViewController: UIViewController {
     @IBAction func onBackgroundTap(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: {
             if countElements(self.composeTextView.text) > 0 {
-                self.client.storedTweet = self.composeTextView.text
+                TwitterClient.client.storedTweet = self.composeTextView.text
             }
         })
     }
     
-    var client = TwitterClient.client
     var feedViewControllerDelegate: FeedViewController!
     
     required init(coder aDecoder: NSCoder) {
@@ -37,16 +36,24 @@ class ComposeViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        if client.storedTweet != nil && countElements(client.storedTweet!) > 0 {
-            composeTextView.text = client.storedTweet
+        if countElements(TwitterClient.client.storedTweet) > 0 {
+            composeTextView.text = TwitterClient.client.storedTweet
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        self.userImageView.layer.cornerRadius = 3
-//        self.userImageView.clipsToBounds = true
+        let user: User? = TwitterClient.client.user
+        
+        if user != nil {
+            self.nameLabel.text = user!.name
+            self.usernameLabel.text = user!.username
+            self.userProfileImageView.image = user!.profileImage
+            self.charCountLabel.text = String(140 - countElements(TwitterClient.client.storedTweet))
+            self.userProfileImageView.layer.cornerRadius = 3
+            self.userProfileImageView.clipsToBounds = true
+        }
     }
 
     override func viewWillDisappear(animated: Bool) {
