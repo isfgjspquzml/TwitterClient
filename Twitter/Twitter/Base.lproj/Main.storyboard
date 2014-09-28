@@ -6,6 +6,27 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Tweet View Controller-->
+        <scene sceneID="uox-U7-9Tp">
+            <objects>
+                <viewController id="6YM-eL-iXu" customClass="TweetViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cOH-Dj-hPH"/>
+                        <viewControllerLayoutGuide type="bottom" id="5Eh-vX-30f"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yyd-Ab-0sk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dl9-5C-bfU">
+                        <barButtonItem key="leftBarButtonItem" title="Return" id="X63-NY-KZZ"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7LV-Xw-kEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1749" y="-1267"/>
+        </scene>
         <!--Feed View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -82,6 +103,7 @@
                                             <outlet property="tweetLabel" destination="RMp-aO-Ejc" id="CAs-6a-2gA"/>
                                             <outlet property="userImageView" destination="29f-nw-mHl" id="43K-Bh-FOh"/>
                                             <outlet property="usernameLabel" destination="TJi-O6-cGz" id="W6K-X4-6MJ"/>
+                                            <segue destination="Ajg-uE-deB" kind="presentation" identifier="tweetViewSegue" modalTransitionStyle="flipHorizontal" id="frU-Y6-6RR"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -254,6 +276,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gv6-LD-l8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="219" y="-557"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Yaf-nh-TgL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ajg-uE-deB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SY7-vT-EKS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6YM-eL-iXu" kind="relationship" relationship="rootViewController" id="fTH-yr-6kZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4ic-DO-q8s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="937" y="-1267"/>
         </scene>
     </scenes>
     <resources>

@@ -40,19 +40,23 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             UIView.animateWithDuration(0.5, animations: {
                 self.behindTintImageView.alpha = 1
             })
+        } else if segue.identifier == "tweetViewSegue" {
+            let tweetViewController = segue.destinationViewController as TweetViewController
+            let cellRow = feedTableView.indexPathForCell(sender as StatusTableViewCell)?.row
+            tweetViewController.cellRow = cellRow
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = feedTableView.dequeueReusableCellWithIdentifier("statusCell") as StatusTableViewCell
-        let status = TwitterClient.client.getStatuses()?[indexPath.row]
+        let status = TwitterClient.client.statuses![indexPath.row]
         cell.status = status
         return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if TwitterClient.client.getStatuses()?.count > 0 {
-            return TwitterClient.client.getStatuses()!.count
+        if TwitterClient.client.statuses?.count > 0 {
+            return TwitterClient.client.statuses!.count
         } else {
             return 0
         }
@@ -62,6 +66,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         UIView.animateWithDuration(0.5, animations: {
             self.behindTintImageView.alpha = 0
         })
+    }
+    
+    func returnFromTweetView() {
+        
     }
     
     func refresh(sender: AnyObject) {

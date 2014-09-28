@@ -34,10 +34,6 @@ class TwitterClient: NSObject {
         accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
     }
     
-    func getStatuses() -> [Status]? {
-        return statuses
-    }
-    
     func getAccount() {
         accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (success, error) in
             if success {
