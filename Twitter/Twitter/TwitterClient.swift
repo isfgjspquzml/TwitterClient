@@ -96,6 +96,11 @@ class TwitterClient: NSObject {
         task.resume()
     }
     
+    func tweetMessage(message: String) {
+        if account == nil {return}
+//        https://api.twitter.com/1.1/statuses/update.json
+    }
+    
     func retweetTweet() {
         
     }

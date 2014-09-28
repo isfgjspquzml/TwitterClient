@@ -20,6 +20,7 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var behindTintView: UIImageView!
     
     @IBAction func onRetweetTapped(sender: AnyObject) {
+
     }
     
     @IBAction func onFavoriteTapped(sender: AnyObject) {

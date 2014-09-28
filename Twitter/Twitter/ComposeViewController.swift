@@ -31,8 +31,6 @@ class ComposeViewController: UIViewController {
         })
     }
     
-    
-    
     var feedViewControllerDelegate: FeedViewController!
     var tweetViewControllerDelegate: TweetViewController!
     
