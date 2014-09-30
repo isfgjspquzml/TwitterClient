@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Twitter/TwitterClient.swift"
-            timestampString = "433750580.8899"
+            timestampString = "433753218.202815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "favoriteTweet(_:favorite:)"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "retweetTweet(_:retweeted:row:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,44 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Twitter/TwitterClient.swift"
-            timestampString = "433752262.220479"
+            timestampString = "433754706.225163"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
-            landmarkName = "favoriteTweet(_:favorite:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Twitter/TwitterClient.swift"
-            timestampString = "433751343.516625"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "tweetMessage(_:tweetID:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Twitter/TwitterClient.swift"
-            timestampString = "433752289.299351"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "favoriteTweet(_:favorite:)"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "retweetTweet(_:retweeted:row:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

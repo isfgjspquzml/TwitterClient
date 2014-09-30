@@ -23,6 +23,7 @@ class TwitterClient: NSObject {
     let urlSession = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
     
     var feedViewController: FeedViewController!
+    var tweetViewController: TweetViewController!
     
     var user: User?
     var statuses: [Status]?
@@ -118,7 +119,7 @@ class TwitterClient: NSObject {
         task.resume()
     }
     
-    func retweetTweet(tweetId: Int, retweeted: Int) {
+    func retweetTweet(tweetId: Int, retweeted: Int, row: Int?) {
         if account == nil {return}
         
         var stringURL = "https://api.twitter.com/1.1/statuses/retweet/\(tweetId).json"
@@ -136,7 +137,12 @@ class TwitterClient: NSObject {
             if error != nil {
                 NSLog("Error posting retweet")
             } else {
-                
+                let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
+                println(dict)
+                if retweeted == 0 {
+                    let retweetId = dict["retweeted_status"]!["id"]! as Int
+                    TwitterClient.client.statuses![row!].retweetId = retweetId
+                }
             }
         })
         task.resume()
@@ -161,8 +167,6 @@ class TwitterClient: NSObject {
             if error != nil {
                 NSLog("Error favoriting tweet")
             } else {
-                println(data)
-                println(response)
                 let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
                 println(dict)
             }

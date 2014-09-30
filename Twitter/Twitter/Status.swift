@@ -19,6 +19,7 @@ class Status: NSObject {
     var timeStamp: NSTimeInterval?
     var retweetCount: Int
     var retweeted: Int
+    var retweetId: Int?
     var favoriteCount: Int
     var favorited: Int
     var tweetId: Int
@@ -26,6 +27,7 @@ class Status: NSObject {
     init(dictionary: NSDictionary) {
         var userDict = dictionary["user"]! as NSDictionary
         var entitiesDict = dictionary["entities"]! as NSDictionary
+        var retweetDict = dictionary["retweeted_status"] as? NSDictionary
         
         self.name = userDict["name"]! as NSString
         self.username = userDict["screen_name"]! as NSString
@@ -35,6 +37,9 @@ class Status: NSObject {
         self.hashtagArray = entitiesDict["hashtags"]! as NSArray
         self.retweetCount = dictionary["retweet_count"]! as Int
         self.retweeted = dictionary["retweeted"]! as Int
+        if retweetDict != nil {
+            self.retweetId = retweetDict!["id"] as? Int
+        }
         self.favoriteCount = dictionary["favorite_count"]! as Int
         self.favorited = dictionary["favorited"]! as Int
         self.tweetId = dictionary["id"]! as Int
