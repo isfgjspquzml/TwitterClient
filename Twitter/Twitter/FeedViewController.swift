@@ -46,6 +46,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let tweetViewController = segue.destinationViewController as TweetViewController
             let cellRow = feedTableView.indexPathForCell(sender as StatusTableViewCell)?.row
             tweetViewController.status = TwitterClient.client.statuses![cellRow!]
+            tweetViewController.row = cellRow
             tweetViewController.feedViewControllerDelegate = self
         }
     }

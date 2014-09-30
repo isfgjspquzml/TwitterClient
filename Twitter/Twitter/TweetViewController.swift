@@ -20,10 +20,17 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var behindTintView: UIImageView!
     
     @IBAction func onRetweetTapped(sender: AnyObject) {
-
+        TwitterClient.client.retweetTweet(status!.tweetId, retweeted: status!.retweeted)
+        status!.retweeted = abs(1-status!.retweeted)
+        TwitterClient.client.statuses![row!].retweeted = status!.retweeted
+        numRetweetsChanged()
     }
     
     @IBAction func onFavoriteTapped(sender: AnyObject) {
+        TwitterClient.client.favoriteTweet(status!.tweetId, favorite: status!.favorited)
+        status!.favorited = abs(1-status!.favorited)
+        TwitterClient.client.statuses![row!].favorited = status!.favorited
+        numFavoritesChanged()
     }
     
     @IBAction func onReturnTapped(sender: AnyObject) {
@@ -33,6 +40,7 @@ class TweetViewController: UIViewController {
     }
     
     var status: Status?
+    var row: Int?
     var feedViewControllerDelegate: FeedViewController?
     
     override func viewDidLoad() {
@@ -63,6 +71,8 @@ class TweetViewController: UIViewController {
         numRetweetsChanged()
         numFavorites.text = String(status!.favoriteCount)
         numFavoritesChanged()
+        
+        TwitterClient.client.currentTweetId = status!.tweetId
     }
     
     func numRetweetsChanged() {

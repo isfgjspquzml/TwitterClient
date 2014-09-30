@@ -333,6 +333,9 @@
                                                 <rect key="frame" x="249" y="3" width="40" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <state key="normal" title="Tweet"/>
+                                                <connections>
+                                                    <action selector="onReplyOrTweetTap:" destination="2Bu-5G-QmQ" eventType="touchUpInside" id="DKY-6Q-FiJ"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Q5-Zj-EKd">
                                                 <rect key="frame" x="0.0" y="3" width="40" height="40"/>

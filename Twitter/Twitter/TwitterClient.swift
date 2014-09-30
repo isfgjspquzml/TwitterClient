@@ -29,6 +29,7 @@ class TwitterClient: NSObject {
     var account: ACAccount?
     var storedTweet: String = ""
     var storedReplyTweet: String = ""
+    var currentTweetId : Int?
     
     override init() {
         accountStore = ACAccountStore()
@@ -96,20 +97,77 @@ class TwitterClient: NSObject {
         task.resume()
     }
     
-    func tweetMessage(message: String) {
+    func tweetMessage(message: String, tweetID: Int?) {
         if account == nil {return}
-//        https://api.twitter.com/1.1/statuses/update.json
+        var params = NSMutableDictionary(object: message, forKey: "status")
+        
+        if tweetID != nil {
+            params.setValue(tweetID!, forKey: "in_reply_to_status_id")
+        }
+        let url = NSURL(string: "https://api.twitter.com/1.1/statuses/update.json")
+        let authRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .POST, URL: url, parameters: params)
+        
+        authRequest.account = account
+        let request = authRequest.preparedURLRequest()
+        
+        let task = self.urlSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            if error != nil {
+                NSLog("Error posting tweet")
+            }
+        })
+        task.resume()
     }
     
-    func retweetTweet() {
+    func retweetTweet(tweetId: Int, retweeted: Int) {
+        if account == nil {return}
         
+        var stringURL = "https://api.twitter.com/1.1/statuses/retweet/\(tweetId).json"
+        if retweeted == 1 {
+            stringURL = "https://api.twitter.com/1.1/statuses/destroy/\(tweetId).json"
+        }
+        
+        let url = NSURL(string: stringURL)
+        let authRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .POST, URL: url, parameters: nil)
+        
+        authRequest.account = account
+        let request = authRequest.preparedURLRequest()
+        
+        let task = self.urlSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            if error != nil {
+                NSLog("Error posting retweet")
+            } else {
+                
+            }
+        })
+        task.resume()
     }
     
-    func favoriteTweet() {
+    func favoriteTweet(tweetId: Int, favorite: Int) {
+        if account == nil {return}
         
-    }
-    
-    func replyToTweet() {
+        var stringAction = "create"
+        if favorite == 1 {
+            stringAction = "destroy"
+        }
         
+        stringAction = "https://api.twitter.com/1.1/favorites/\(stringAction)?id=\(tweetId)"
+        
+        let url = NSURL(string: stringAction)
+        let authRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .POST, URL: url, parameters: nil)
+        
+        authRequest.account = account
+        let request = authRequest.preparedURLRequest()
+        
+        let task = self.urlSession.dataTaskWithRequest(request, completionHandler: { (data, response, error) in
+            if error != nil {
+                NSLog("Error favoriting tweet")
+            } else {
+                println(data)
+                println(response)
+                let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
+                println(dict)
+            }
+        })
+        task.resume()
     }
 }

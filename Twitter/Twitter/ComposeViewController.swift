@@ -18,17 +18,19 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var tweetButton: UIButton!
     
     @IBAction func onBackgroundTap(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: {
-            if self.feedViewControllerDelegate != nil {
-                if countElements(self.composeTextView.text) > 0 {
-                    TwitterClient.client.storedTweet = self.composeTextView.text
-                }
-            } else {
-                if countElements(self.composeTextView.text) > 0 {
-                    TwitterClient.client.storedReplyTweet = self.composeTextView.text
-                }
-            }
-        })
+        dismissView()
+    }
+    
+    @IBAction func onReplyOrTweetTap(sender: AnyObject) {
+        if self.feedViewControllerDelegate != nil {
+            TwitterClient.client.tweetMessage(composeTextView.text, tweetID: nil)
+            TwitterClient.client.storedTweet = ""
+        } else {
+            TwitterClient.client.tweetMessage(composeTextView.text, tweetID: TwitterClient.client.currentTweetId)
+            TwitterClient.client.storedReplyTweet = ""
+        }
+        composeTextView.text = ""
+        dismissView()
     }
     
     var feedViewControllerDelegate: FeedViewController!
@@ -51,6 +53,8 @@ class ComposeViewController: UIViewController {
         } else {
             if countElements(TwitterClient.client.storedReplyTweet) > 0 {
                 composeTextView.text = TwitterClient.client.storedReplyTweet
+            } else {
+                composeTextView.text = "@" + tweetViewControllerDelegate.status!.username + " "
             }
             tweetButton.setTitle("Reply", forState: .Normal)
         }
@@ -80,5 +84,19 @@ class ComposeViewController: UIViewController {
         } else {
             tweetViewControllerDelegate!.returnFromComposeView()
         }
+    }
+    
+    func dismissView() {
+        self.dismissViewControllerAnimated(true, completion: {
+            if self.feedViewControllerDelegate != nil {
+                if countElements(self.composeTextView.text) > 0 {
+                    TwitterClient.client.storedTweet = self.composeTextView.text
+                }
+            } else {
+                if countElements(self.composeTextView.text) > 0 {
+                    TwitterClient.client.storedReplyTweet = self.composeTextView.text
+                }
+            }
+        })
     }
 }
