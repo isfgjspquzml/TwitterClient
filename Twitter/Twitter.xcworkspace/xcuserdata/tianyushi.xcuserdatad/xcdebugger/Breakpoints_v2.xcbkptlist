@@ -6,7 +6,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Twitter/TwitterClient.swift"
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Twitter/TwitterClient.swift"
-            timestampString = "433751713.299432"
+            timestampString = "433752262.220479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "164"
-            endingLineNumber = "164"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "favoriteTweet(_:favorite:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -48,6 +48,22 @@
             startingLineNumber = "101"
             endingLineNumber = "101"
             landmarkName = "tweetMessage(_:tweetID:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Twitter/TwitterClient.swift"
+            timestampString = "433752289.299351"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "favoriteTweet(_:favorite:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

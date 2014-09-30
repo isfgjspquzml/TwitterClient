@@ -78,6 +78,7 @@ class TweetViewController: UIViewController {
     }
     
     func numRetweetsChanged() {
+        numRetweets.text = String(status!.retweetCount)
         if status!.retweeted == 0 {
             numRetweets.font = UIFont.systemFontOfSize(12)
         } else {
@@ -86,6 +87,7 @@ class TweetViewController: UIViewController {
     }
     
     func numFavoritesChanged() {
+        numFavorites.text = String(status!.favoriteCount)
         if status!.favorited == 0 {
             numFavorites.font = UIFont.systemFontOfSize(12)
         } else {
