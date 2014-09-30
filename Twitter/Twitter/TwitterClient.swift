@@ -139,10 +139,10 @@ class TwitterClient: NSObject {
             } else {
                 let dict = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as NSDictionary
                 println(dict)
-                if retweeted == 0 {
-                    let retweetId = dict["retweeted_status"]!["id"]! as Int
-                    TwitterClient.client.statuses![row!].retweetId = retweetId
-                }
+//                if retweeted == 0 {
+//                    let retweetId = dict["retweeted_status"]!["id"]! as Int
+//                    TwitterClient.client.statuses![row!].retweetId = retweetId
+//                }
             }
         })
         task.resume()

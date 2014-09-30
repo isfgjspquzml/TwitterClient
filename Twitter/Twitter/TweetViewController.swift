@@ -20,11 +20,11 @@ class TweetViewController: UIViewController {
     @IBOutlet weak var behindTintView: UIImageView!
     
     @IBAction func onRetweetTapped(sender: AnyObject) {
-        if status!.retweeted == 0 {
+//        if status!.retweeted == 0 {
             TwitterClient.client.retweetTweet(status!.tweetId, retweeted: status!.retweeted, row: row)
-        } else {
-            TwitterClient.client.retweetTweet(status!.retweetId!, retweeted: status!.retweeted, row: row)
-        }
+//        } else {
+//            TwitterClient.client.retweetTweet(status!.retweetId!, retweeted: status!.retweeted, row: row)
+//        }
         let change = 1-status!.retweeted
         status!.retweetCount += change
         status!.retweeted = abs(change)
