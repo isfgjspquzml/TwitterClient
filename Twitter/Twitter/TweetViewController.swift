@@ -21,15 +21,17 @@ class TweetViewController: UIViewController {
     
     @IBAction func onRetweetTapped(sender: AnyObject) {
         TwitterClient.client.retweetTweet(status!.tweetId, retweeted: status!.retweeted)
-        status!.retweeted = abs(1-status!.retweeted)
-        TwitterClient.client.statuses![row!].retweeted = status!.retweeted
+        let change = 1-status!.retweeted
+        status!.retweetCount += change
+        status!.retweeted = abs(change)
         numRetweetsChanged()
     }
     
     @IBAction func onFavoriteTapped(sender: AnyObject) {
         TwitterClient.client.favoriteTweet(status!.tweetId, favorite: status!.favorited)
-        status!.favorited = abs(1-status!.favorited)
-        TwitterClient.client.statuses![row!].favorited = status!.favorited
+        let change = 1-status!.favorited
+        status!.favoriteCount += change
+        status!.favorited = abs(change)
         numFavoritesChanged()
     }
     

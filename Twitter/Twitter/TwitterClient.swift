@@ -150,7 +150,9 @@ class TwitterClient: NSObject {
             stringAction = "destroy"
         }
         
-        stringAction = "https://api.twitter.com/1.1/favorites/\(stringAction)?id=\(tweetId)"
+        stringAction = "https://api.twitter.com/1.1/favorites/" + stringAction + "?id=" + String(tweetId)
+        stringAction = "https://api.twitter.com/1.1/favorites/create?id=" + String(tweetId)
+
         
         let url = NSURL(string: stringAction)
         let authRequest = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .POST, URL: url, parameters: nil)
